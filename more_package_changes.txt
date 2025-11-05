@@ -1,0 +1,5 @@
+ncurses from 0:6.1%2B20181013-2%2Bdeb10u3-amd64 to 0:6.1+20181013-2+deb10u5-amd64
+gnutls28 from 0:3.6.7-4%2Bdeb10u10-amd64 to 0:3.6.7-4+deb10u12-amd64
+glibc from 0:2.28-10%2Bdeb10u2-amd64 to 0:2.28-10+deb10u3-amd64
+util-linux from 0:2.33.1-0.1-amd64 to 0:2.33.1-0.1+deb10u1-amd64
+tar from 0:1.30%2Bdfsg-6-amd64 to 0:1.30+dfsg-6+deb10u1-amd64

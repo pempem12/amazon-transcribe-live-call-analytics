@@ -1,0 +1,8 @@
+I'm dealing with some security findings that i need resolved. Here they are:
+
+1. Container images in ECS cluster "LCA-bandytoy-WEBSOCKETTRANSCRIBERSTACK-46RBOCMXZDJA-TranscribingCluster-GtS9CFC050Ng" require remediation. Follow these steps to address the vulnerabilities:
+     Look into "package_details_a.png" for more details
+2. OS updates required for EC2 instance:
+     Look into "package_details_b.png" for more details"
+
+    How can we resolve these and update my LCA deployment?
