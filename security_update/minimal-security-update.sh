@@ -25,11 +25,11 @@ STACK_NAME=$1
 echo -e "${YELLOW}Step 1: Creating minimal security Dockerfile${NC}"
 
 # Create a minimal security-focused Dockerfile that keeps the original structure
-cat > lca-websocket-transcriber-stack/source/app/Dockerfile.security << 'EOF'
+cat > ../lca-websocket-transcriber-stack/source/app/Dockerfile.security << 'EOF'
 ARG NODE_VERSION=18
 
-# First, build the project
-FROM public.ecr.aws/docker/library/node:18-bullseye AS builder
+# First, build the project - explicitly specify platform for ECS Fargate compatibility
+FROM --platform=linux/amd64 public.ecr.aws/docker/library/node:18-bullseye AS builder
 
 # Apply security updates to base packages
 RUN apt-get update && \
@@ -66,8 +66,8 @@ RUN npm run build
 
 RUN npm prune --production
 
-# Now create the runtime image and copy the build artifacts into it
-FROM public.ecr.aws/docker/library/node:18-slim AS runtime
+# Now create the runtime image and copy the build artifacts into it - explicitly specify platform for ECS Fargate compatibility
+FROM --platform=linux/amd64 public.ecr.aws/docker/library/node:18-slim AS runtime
 
 # Apply security updates to runtime image
 RUN apt-get update && \
@@ -95,13 +95,13 @@ ENTRYPOINT ["node", "/app/dist/index.js"]
 EOF
 
 echo -e "${YELLOW}Step 2: Backing up original Dockerfile${NC}"
-cp lca-websocket-transcriber-stack/source/app/Dockerfile lca-websocket-transcriber-stack/source/app/Dockerfile.backup
+cp ../lca-websocket-transcriber-stack/source/app/Dockerfile ../lca-websocket-transcriber-stack/source/app/Dockerfile.backup
 
 echo -e "${YELLOW}Step 3: Using security-focused Dockerfile${NC}"
-cp lca-websocket-transcriber-stack/source/app/Dockerfile.security lca-websocket-transcriber-stack/source/app/Dockerfile
+cp ../lca-websocket-transcriber-stack/source/app/Dockerfile.security ../lca-websocket-transcriber-stack/source/app/Dockerfile
 
 echo -e "${YELLOW}Step 4: Building and deploying container${NC}"
-cd lca-websocket-transcriber-stack
+cd ../lca-websocket-transcriber-stack
 ./update-ecs.sh "$STACK_NAME"
 
 if [ $? -eq 0 ]; then
@@ -113,7 +113,7 @@ else
     exit 1
 fi
 
-cd ..
+cd ../security_update_scripts
 
 echo -e "${YELLOW}Step 5: Updating EC2 Instance${NC}"
 # Apply EC2 security updates using CloudFormation

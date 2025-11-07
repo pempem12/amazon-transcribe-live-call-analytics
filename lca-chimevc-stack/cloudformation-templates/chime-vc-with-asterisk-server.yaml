@@ -701,8 +701,16 @@ Resources:
           # Apply all security updates first
           sudo apt-get upgrade -y
           
-          # Install specific security-patched versions if available
-          sudo apt-get install -y --only-upgrade liburiparser1 libopusfile0 || true
+          # Enable Ubuntu Pro ESM for security patches (free for personal use)
+          sudo pro enable esm-infra --assume-yes || echo "ESM already enabled or failed"
+          sudo apt-get update
+          
+          # Install specific ESM security-patched versions
+          sudo apt-get install -y liburiparser1=0:0.9.6+dfsg-1ubuntu0.1~esm1 || \
+          sudo apt-get install -y --only-upgrade liburiparser1 || echo "Could not update liburiparser1"
+          
+          sudo apt-get install -y libopusfile0=0:0.9+20170913-1.1ubuntu0.1~esm1 || \
+          sudo apt-get install -y --only-upgrade libopusfile0 || echo "Could not update libopusfile0"
           
           # Install required packages
           sudo apt-get install unzip asterisk python3-pip jq -y

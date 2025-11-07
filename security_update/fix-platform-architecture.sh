@@ -34,7 +34,7 @@ else
 fi
 
 echo -e "${YELLOW}Step 2: Rebuilding container image for linux/amd64${NC}"
-cd lca-websocket-transcriber-stack
+cd ../lca-websocket-transcriber-stack
 
 # Run the updated build script
 ./update-ecs.sh "$STACK_NAME"
@@ -46,7 +46,7 @@ else
     exit 1
 fi
 
-cd ..
+cd ../security_update_scripts
 
 echo -e "${YELLOW}Step 3: Monitoring ECS service deployment${NC}"
 echo "Checking ECS service status..."

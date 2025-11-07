@@ -26,7 +26,7 @@ echo -e "${YELLOW}Step 1: Updating Container Images${NC}"
 echo "Building and deploying updated container images with security patches..."
 
 # Navigate to websocket transcriber directory
-cd lca-websocket-transcriber-stack
+cd ../lca-websocket-transcriber-stack
 
 # Run the clean build script first
 echo "Running clean build script..."
@@ -39,7 +39,7 @@ else
     exit 1
 fi
 
-cd ..
+cd ../security_update_scripts
 
 echo -e "${YELLOW}Step 2: Updating EC2 Instance${NC}"
 echo "Triggering EC2 instance replacement with updated AMI and packages..."
@@ -89,7 +89,7 @@ echo -e "${GREEN}=== Security Update Deployment Complete ===${NC}"
 echo ""
 echo "Summary of changes applied:"
 echo "• Container images updated to Node.js 20 with latest security patches"
-echo "• Updated vulnerable packages: ncurses, gnutls, glibc, util-linux"
+echo "• Updated vulnerable packages: ncurses, gnutls, glibc, util-linux, tar"
 echo "• EC2 instance updated with patches for: liburiparser1, libopusfile0"
 echo ""
 echo "Next steps:"

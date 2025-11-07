@@ -7,7 +7,7 @@ set -e
 
 echo "=== Fixing LCA WebSocket Dependencies ==="
 
-cd lca-websocket-transcriber-stack/source/app
+cd ../lca-websocket-transcriber-stack/source/app
 
 echo "1. Removing old package-lock.json..."
 rm -f package-lock.json
@@ -23,9 +23,9 @@ npm run buildcheck
 
 echo "✓ Dependencies fixed! You can now run the deployment script."
 
-cd ../../..
+cd ../../../security_update_scripts
 
 echo ""
 echo "Next steps:"
 echo "1. Run: ./security-update-deployment.sh YOUR_STACK_NAME"
-echo "2. Or run: cd lca-websocket-transcriber-stack && ./clean-and-build.sh YOUR_STACK_NAME"
+echo "2. Or run: cd ../lca-websocket-transcriber-stack && ./clean-and-build.sh YOUR_STACK_NAME"
